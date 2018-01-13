@@ -9,6 +9,7 @@ import com.ai.parse_row_data.dao.repository.PlanRepository;
 import com.ai.parse_row_data.dao.repository.UserPortfolioRepository;
 import com.ai.parse_row_data.dao.repository.UserTradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
  * @Date:Created in 12:35 2018/1/10
  * @Modified By:
  */
-@Service
+@Component
 public class Bean2DbServiceImpl{
 
     @Autowired

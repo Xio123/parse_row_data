@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Author:qmfang
@@ -26,7 +28,7 @@ public class BaseLine {
     @Id
     @GeneratedValue
     private Long id;
-    private LocalDateTime time;
+    private LocalDate time;
     private BigDecimal baseMarket;
     private BigDecimal aiMarket;
     @Enumerated(value = EnumType.ORDINAL)
@@ -34,9 +36,16 @@ public class BaseLine {
     private BigDecimal gain;
 
     private Byte isDeleted;
-    private LocalDateTime createdTime;
-    private LocalDateTime updatedTime;
-    private LocalDateTime deletedTime;
+    private LocalDate createdTime;
+    private LocalDate updatedTime;
+    private LocalDate deletedTime;
 
-
+    public static BaseLine bulid(String str) {
+        String[] baseStr = str.split("\\s+");
+        LocalDate time = LocalDate.parse(baseStr[0].trim(), DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        BigDecimal baseMarket = new BigDecimal(baseStr[7].trim());
+        BigDecimal aiMarket = new BigDecimal(baseStr[8].trim());
+        BigDecimal gain = new BigDecimal(baseStr[9].trim());
+        return BaseLine.builder().baseMarket(baseMarket).time(time).aiMarket(aiMarket).gain(gain).type(BaseLineMarketEnum.USA_DJIA).build();
+    }
 }

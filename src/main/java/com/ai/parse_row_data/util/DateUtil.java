@@ -1,5 +1,6 @@
 package com.ai.parse_row_data.util;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -13,6 +14,7 @@ public class DateUtil {
 
     public static final int SECONDS_IN_DAY = 60 * 60 * 24;
     public static final long MILLIS_IN_DAY = 1000L * SECONDS_IN_DAY;
+
 
     public static boolean isSameDay(Date d1, Date d2) {
         final long interval = d1.getTime() - d2.getTime();

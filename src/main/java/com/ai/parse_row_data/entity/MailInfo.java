@@ -1,24 +1,16 @@
 package com.ai.parse_row_data.entity;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import java.io.*;
+import java.util.Date;
 
 /**
  * @Author:qmfang
  * @Description:
  * @Date:Created in 21:05 2018/1/8
  * @Modified By:
- */
-
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-/**
- * 邮件信息对象
- *
- * @author lupf
  */
 public class MailInfo {
 
@@ -164,15 +156,13 @@ public class MailInfo {
         if (nameIndex != -1) {
             conName = true;
         }
-
         //System.out.println("邮件内容的类型:　" + contentType);
 
         if (part.isMimeType("text/plain") && conName == false) {
-            // text/plain 类型
             bodyText.append((String) part.getContent());
         } else if (part.isMimeType("text/html") && conName == false) {
             // text/html 类型
-            bodyText.append((String) part.getContent());
+            //bodyText.append((String) part.getContent());
         } else if (part.isMimeType("multipart/*")) {
             // multipart/*
             Multipart multipart = (Multipart) part.getContent();
@@ -182,7 +172,7 @@ public class MailInfo {
             }
         } else if (part.isMimeType("message/rfc822")) {
             // message/rfc822
-            getMailContent((Part) part.getContent());
+            //getMailContent((Part) part.getContent());
         } else {
 
         }
