@@ -33,10 +33,8 @@ public class UserTrade {
     private Long id;
     private String userCode;
     private String name;
-    @Enumerated(value = EnumType.ORDINAL)
-    private TradeActionEnum action;
-    @Enumerated(value = EnumType.ORDINAL)
-    private SharesTypeEnum type;
+    private String action;
+    private String type;
     private LocalDate oldDate;
     private BigDecimal oldPrice;
     private LocalDate newDate;
@@ -55,8 +53,8 @@ public class UserTrade {
 //        //ATVI    48.68   20170322        50.19   20170330        2.9%    6       Activision Blizzard,    COMPUTER SOFTWARE & SERVICES - Mult
         String[] items = oneItem.split("\\s+");
         String name = items[0];
-        TradeActionEnum action=TradeActionEnum.valueOf(userAction.get(name));
-        SharesTypeEnum type = SharesTypeEnum.valueOf(shareType);
+//        TradeActionEnum action=TradeActionEnum.valueOf(userAction.get(name));
+//        SharesTypeEnum type = SharesTypeEnum.valueOf(shareType);
         LocalDate oldDate = LocalDate.parse(items[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
         BigDecimal oldPrice = new BigDecimal(items[1]);
         LocalDate newDate = LocalDate.parse(items[4], DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -67,9 +65,9 @@ public class UserTrade {
             note += (items[i] + " ");
         }
         return UserTrade.builder()
-                .name(name).type(type)
-                .oldDate(oldDate).oldPrice(oldPrice).action(action)
-                .newDate(newDate).newPrice(newPrice).gain(gain).note(note)
+                .name(name).type(shareType)
+                .oldDate(oldDate).oldPrice(oldPrice).action(userAction.get(name))
+                .newDate(newDate).newPrice(newPrice).gain(gain).note(note).isDeleted((byte)0)
                 .build();
 
     }

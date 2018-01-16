@@ -39,8 +39,7 @@ public class UserPortfolio {
     private BigDecimal newRank;
     private Integer holdDay;
     private BigDecimal gain;
-    @Enumerated(value = EnumType.ORDINAL)
-    private SharesTypeEnum type;
+    private String type;
     private BigDecimal totalGain;
 
     private Byte isDeleted;
@@ -59,10 +58,12 @@ public class UserPortfolio {
         BigDecimal newRank = new BigDecimal(iteams[6]);
         Integer holdDay = Integer.valueOf(iteams[7]);
         BigDecimal gain = new BigDecimal(iteams[8]);
-        SharesTypeEnum type = SharesTypeEnum.valueOf(shareType);
+//        SharesTypeEnum type = SharesTypeEnum.valueOf(shareType);
         return UserPortfolio.builder().name(name).oldData(oldData).oldPrice(oldPrice).oldRank(oldRank)
                 .newData(newData).newPrice(newPrice).newRank(newRank)
-                .holdDay(holdDay).gain(gain).type(type).totalGain(totalGain).build();
+                .holdDay(holdDay).gain(gain).type(shareType).totalGain(totalGain)
+                .isDeleted((byte)0)
+                .build();
     }
 
 }

@@ -31,10 +31,8 @@ public class Plan {
     private Long id;
     private LocalDate newData;
     private String name;
-    @Enumerated(value = EnumType.ORDINAL)
-    private SharesTypeEnum type;
-    @Enumerated(value = EnumType.ORDINAL)
-    private TradeActionEnum action;
+    private String type;
+    private String action;
     private BigDecimal rank;
     private String note;
 
@@ -45,16 +43,17 @@ public class Plan {
 
     public static Plan bulid(String str,String time) {
         String[] baseStr = str.trim().split("\\s+");
-        SharesTypeEnum sharesTypeEnum=SharesTypeEnum.valueOf(baseStr[0]);
+//        SharesTypeEnum sharesTypeEnum=SharesTypeEnum.valueOf(baseStr[0]);
+//        TradeActionEnum action=TradeActionEnum.valueOf(baseStr[2]);
         String name=baseStr[1];
-        TradeActionEnum action=TradeActionEnum.valueOf(baseStr[2]);
         LocalDate data = LocalDate.parse(time, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         BigDecimal rank=new BigDecimal(baseStr[7]);
         String note="";
         for(int i=8;i<baseStr.length;i++){
             note+=baseStr[i]+" ";
         }
-        return Plan.builder().action(action).type(sharesTypeEnum).name(name).newData(data).rank(rank).note(note).build();
+        return Plan.builder().action(baseStr[2]).type(baseStr[0]).name(name).newData(data).rank(rank).note(note).isDeleted((byte)0)
+                .build();
 
     }
 

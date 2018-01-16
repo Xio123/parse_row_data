@@ -31,8 +31,7 @@ public class BaseLine {
     private LocalDate time;
     private BigDecimal baseMarket;
     private BigDecimal aiMarket;
-    @Enumerated(value = EnumType.ORDINAL)
-    private BaseLineMarketEnum type;
+    private String type;
     private BigDecimal gain;
 
     private Byte isDeleted;
@@ -46,6 +45,8 @@ public class BaseLine {
         BigDecimal baseMarket = new BigDecimal(baseStr[7].trim());
         BigDecimal aiMarket = new BigDecimal(baseStr[8].trim());
         BigDecimal gain = new BigDecimal(baseStr[9].trim());
-        return BaseLine.builder().baseMarket(baseMarket).time(time).aiMarket(aiMarket).gain(gain).type(BaseLineMarketEnum.USA_DJIA).build();
+        return BaseLine.builder()
+                .baseMarket(baseMarket).time(time).aiMarket(aiMarket).gain(gain).type(BaseLineMarketEnum.USA_DJIA.name()).isDeleted((byte)0)
+                .build();
     }
 }
